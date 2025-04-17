@@ -3,12 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def driver():
     options = Options()
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--headless=new")
     driver = webdriver.Chrome(options=options)
-    driver.maximize_window()
+    driver.implicitly_wait(2)
     yield driver
     driver.quit()
