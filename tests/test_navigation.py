@@ -44,3 +44,10 @@ def test_nonexistent_section_link(driver):
     home.open()
     with pytest.raises(NoSuchElementException):
         driver.find_element("link text", "Несуществующий раздел").click()
+
+def test_link_wrong_url(driver):
+    home = HomePage(driver)
+    home.open()
+    home.go_to_section("Акции")
+    current_url = home.get_url()
+    assert "неправильный" not in current_url, "Ожидали корректный URL, а попали на неправильный"
