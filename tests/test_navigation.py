@@ -1,4 +1,6 @@
 import pytest
+from selenium.common import NoSuchElementException
+
 from pages.HomePage import HomePage
 
 @pytest.mark.parametrize("section_name, expected_url_part", [
@@ -36,3 +38,9 @@ def test_navigate_sections(driver, section_name, expected_url_part):
     home.accept_cookies()
     home.go_to_section(section_name)
     assert expected_url_part in home.get_url()
+
+def test_nonexistent_section_link(driver):
+    home = HomePage(driver)
+    home.open()
+    with pytest.raises(NoSuchElementException):
+        driver.find_element("link text", "Несуществующий раздел").click()
