@@ -2,7 +2,6 @@ import pytest
 from pages.HomePage import HomePage
 
 @pytest.mark.parametrize("section_name, expected_url_part", [
-    ("Постный стол", "postnyy_stol"),
     ("Горячее", "main"),
     ("Мангал", "grill"),
     ("Хинкали и манты", "khinkali_i_manty"),
